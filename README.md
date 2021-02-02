@@ -46,5 +46,5 @@ now go to the file db.sql into this repository. Copy an Paste!
 now if you configured all postgres services, you can use this backend app without problems. 
 
 PD: if you need problems call me and i help you! 
-
+xd
 HERE IS THE POSTMAN URL FOR YOU CAN TESTING THIS APP -----> https://www.getpostman.com/collections/11c149c7f95f17b388e6
