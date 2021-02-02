@@ -1,7 +1,7 @@
 const {nanoid} = require('nanoid')
 const bcrypt = require('bcrypt')
 
-const controllerAuth = require('../Auth/index')
+const controllerAuth = require('../auth/index')
 
 module.exports = function(injectedStore, injectedCache){
     let cache = injectedCache

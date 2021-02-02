@@ -140,7 +140,103 @@ const { set } = require('../mailer')
        }
 }
 
+//---Device:
+const addDevice = async (data, table) =>{
+  try{
+    console.log('se está registrando un device')
+      const method = `INSERT INTO ${table}(id, token, identifier, os, user_id) VALUES($1, $2, $3, $4, $5) RETURNING *`
+      const values = [data.id, data.token, data.identifier, data.os, data.user_id]
+     const dataDevice  = await pool.query(method, values)
+     return dataDevice
+    }catch(e){
+    console.log('error register device:', e)
+     return e
+  }
+}
+const getDevices = async (data, table) =>{
+console.log('[DATA DEVICES] ', data )
+console.log('Aca la table getDevice', table)
 
+try{
+const method = `SELECT * ${table} WHERE user_id = $1 RETURNING *`
+const  values = [data.id]
+const dataUserDevice = await pool.query(method, values)
+console.log('esta es la data de USerdevice:', dataUserDevice)
+return dataUserDevice;
+}catch(e){
+return e
+}
+
+}
+const deleteDevice  = async (data, table) =>{
+  console.log('aqui esta la data', data)
+  console.log('este es el table', table)
+  try{
+    let method = `DELETE FROM ${table} WHERE id = $1 AND identifier = $2 RETURNING *`
+    let values = [data.deviceId, data.loginIdentifier]
+    const respon = await (await pool.query(method, values)).rows
+    console.log('este es el respon', respon)
+    return respon
+  }catch(e){
+    console.log('este es el error-->', e)
+    return e
+  }
+}
+
+//---CARDS:
+const addCard = async (data, table) =>{
+  console.log('this is the data addCard', data)
+try{  
+  const method = `INSERT INTO ${table}(id, user_id, banc_name, count_number, nickname, vcc, type_card) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`
+  const values = [data.id, data.user_id, data.banc_name, data.count_number, data.nickname, data.vcc, data.type_card]
+  const responReq = await (await pool.query(method, values)).rows
+  console.log('this is ADDCARD Respon', responReq)
+  return responReq;
+}catch(e){
+  console.log('this is e', e)
+  return e
+}
+}
+const listMyCards = async (data, table) =>{
+  console.log('this is the user_id [STORE]', data)
+  try{
+    const method = `SELECT * FROM ${table} where user_id = $1`
+    const values = [data]
+    const responReq = await (await pool.query(method, values)).rows
+    console.log('este es el responReq', responReq)
+    return responReq
+  }catch(e){
+console.log('este es el e', e)
+return e
+  }
+}
+
+const getCard = async (data, table) => {
+console.log('this is the data', data)
+  try {
+ const method = `SELECT * FROM ${table} where id = $1`
+ const values = [data.id]
+ const responReq = await (await pool.query(method, values)).rows
+ console.log('this is the resporReq', responReq)
+ return responReq
+} catch (e) {
+  return e
+}
+}
+//code :
+const RequestCode = async (data, table) =>{
+  console.log('this is the data', data)
+  try {
+    method = `SELECT * FROM ${table} WHERE code = $1`
+    values = [data.code]
+    responReq = await (await pool.query(method, values)).rows
+    console.log('responReq COde', responReq)
+    return responReq
+  } catch (error) {
+    console.log('this is the e', error)
+    return error
+  }
+}
 module.exports = {
     //users:
     create:createUser,    
@@ -154,5 +250,17 @@ module.exports = {
     insertLogin,
     create_UF:createUserFacebook,
     getReset:resquestEmailReset,
+    
+    //device:
+    add_D:addDevice,
+    get_D:getDevices,
+    remove_D:deleteDevice,
 
+    //cards :
+    create_C:addCard,
+    list_c:listMyCards,
+    get_card:getCard,
+
+    //codes :
+    get_c:RequestCode
 }

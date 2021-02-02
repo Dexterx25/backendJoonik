@@ -46,7 +46,7 @@ const config = {
         host: process.env.FRIENDS_SRV_HOST || 'localhost',
         port: process.env.FRIENDS_SRV_PORT || 3006
     },
-    invitationService:{
+    cardsService:{
         host: process.env.INVITATIONS_SRV_HOST || 'localhost',
         port: process.env.INVITATIONS_SRV_PORT || 3007
     },

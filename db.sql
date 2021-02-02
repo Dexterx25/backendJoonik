@@ -140,6 +140,40 @@ ALTER TABLE authentications ALTER COLUMN id SET DEFAULT nextval('authentications
 --CREATE INDEX "authentications_pkey" on authentications(id);
 CREATE INDEX "index_authentications_on_user_id" on authentications(user_id);
 
+CREATE TABLE admins(
+  id varchar PRIMARY KEY not null,
+  admin_id varchar not null,
+  full_name varchar not null,
+  email varchar not null,
+  encrypted_password varchar not null,
+  reset_password_token varchar,
+  reset_password_sent_at TIMESTAMP,
+  remember_created_at TIMESTAMP, 
+  first_name varchar,
+  last_name varchar,
+  avatar varchar,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  recovery_pin varchar,
+  country_code integer,
+  phone_number varchar,
+  facebook_avatar varchar,
+  time_zone varchar,
+  unseen_notifications integer default 0,
+  language integer default 0
+);
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON admins
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+CREATE SEQUENCE admins_id_seq OWNED BY admins.id;
+ALTER TABLE admins ALTER COLUMN id SET DEFAULT nextval('admins_id_seq'::regclass);
+
+CREATE INDEX "index_admins_on_email" on admins(email);
+CREATE UNIQUE INDEX "index_admins_on_reset_password_token" on admins(reset_password_token);
+
+ alter table admins  add constraint UQ_admins_email  unique (email);
 
 
 
@@ -248,3 +282,21 @@ ALTER TABLE transactions ALTER COLUMN id SET DEFAULT nextval('transactions_id_se
 
 CREATE INDEX "index_transactions_on_deleted_at" on transactions(deleted_at);
 CREATE INDEX "index_transactions_on_user_id" on transactions(user_id);
+
+CREATE TABLE admins_codes(
+  id varchar not null PRIMARY KEY,
+  code varchar not null,
+  deleted_at TIMESTAMP,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  updated_at TIMESTAMP NOT NULL DEFAULT NOW()   
+
+);
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON admins_codes
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
+
+CREATE SEQUENCE admins_codes_id_seq OWNED BY admins_codes.id;
+ALTER TABLE admins_codes ALTER COLUMN id SET DEFAULT nextval('admins_codes_id_seq'::regclass);
+
+CREATE INDEX "index_admins_codes_on_deleted_at" on admins_codes(deleted_at);

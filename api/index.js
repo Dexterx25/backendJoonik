@@ -7,7 +7,9 @@ const config = require('../config.js');
 const cors = require('cors')
 
 const user = require('./components/user/network');
-const auth = require('./components/Auth/network');
+const admin = require('./components/admin/network');
+const code = require('./components/codes/network')
+const auth = require('./components/auth/network');
 const errors = require('../network/errors');
 
 const app = express();
@@ -19,6 +21,8 @@ app.use(bodyParser.json());
 // ROUER
 app.use('/api/users', user);
 app.use('/api/auth', auth);
+app.use('/api/admins', admin)
+app.use('/api/codes', code)
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/app', express.static('public'));

@@ -30,7 +30,7 @@ const cheak = {
     logged: function(req, owner){
         const decoded = decodeHeader(req);
        console.log("veryfy decoded token:",  decoded)
-   
+      
     
     }
 }

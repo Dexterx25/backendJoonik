@@ -47,11 +47,9 @@ module.exports = function(injectedStore, injectedCache){
         const  dataUserDevice = await store.get_D(data, table)
 
         resolve(dataUserDevice)
-
-
-
       })
   }
+  
   const removeDevice = (data) =>{
        return new Promise( async (resolve, reject) =>{
            if(!data){
