@@ -50,7 +50,22 @@ router.post('/register', async function(req, res){
 
  })
 
+ router.get('/parents', function(req, res){
  
+    const filterFullname = req.query
+    console.log("aqui esta los fullNames-->", filterFullname)
+       controller.filter(req.query) 
+       .then((respon) => {
+   
+   response.success(req, res, respon.rows, 200)
+       })
+       .catch(error =>{
+           response.error(req, res, 'Users Not Found', 500, error )
+       })
+   })
+   
+ 
+
 router.get('/', function(req, res){
  
  const filterFullname = req.query

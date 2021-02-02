@@ -24,6 +24,17 @@ module.exports = function(injectedStore, injectedCache){
                 console.error("[USER CONTROLLER] there are incomplete fields!")
                 reject('Incorrect dates, fill all fields!')
                 return false;
+
+             }
+             if( data.email !== data.email_validation ){
+                 console.error("[USER CONTROLLER] email and email validation there are not equals. Try again")
+                 reject('email and email validation there are not equals. Try again')
+                 return false;
+             }
+             if(data.encrypted_password !== data.password_validation){
+                console.error("[USER CONTROLLER] password and password validation there are not equals. Try again")
+                reject('Password and Password  validation there are not equals. Try again')
+                return false;
              }
      
      const  alter_id = nanoid()
@@ -39,6 +50,7 @@ const body = {        id:alter_id,
                       full_name: `${data.first_name}`+ " " + `${data.last_name}`,
                    //   include:data.include               
   };
+
   console.log("Body Object [USER CONTROLLER]", body)
   console.log('this is the full name[USER CONTROLLER]:', body.full_name)
 

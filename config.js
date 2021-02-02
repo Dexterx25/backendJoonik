@@ -4,7 +4,7 @@ const config = {
     
     DBconfig:{
         user: 'joonik',   
-        password: '1234',
+        password: 'sadsvvex',
         host: 'localhost',
         database:'joonik_db'
     },
@@ -28,7 +28,7 @@ const config = {
     
     //////--->MICROSERVICES:
     
-    eventsService:{
+    TransactionsService:{
     host: process.env.EVENTS_SRV_HOST || 'localhost',
     port: process.env.EVENTS_SRV_PORT || 3002
     },
