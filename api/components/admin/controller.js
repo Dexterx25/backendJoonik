@@ -18,7 +18,7 @@ module.exports = function(injectedStore, injectedCache){
  async function createUser(
     data 
     ){ 
-
+//sasdas
     return new Promise( async (resolve, reject) => {
             if(!data.first_name || !data.last_name || !data.email || !data.encrypted_password){
                 console.error("[USER CONTROLLER] there are incomplete fields!")
