@@ -1,4 +1,17 @@
 # backendJoonik
+!warning! 
+
+Hola, testeador. 
+Los puntos requeridos entan en los endpoints de registro de usuario, login y bueno... lo que entendi en los otros dos puntos es que trayera datos de usuario en este caso le coloquè un microservicio "cards" para registrar tarjetas de creditos con seguridad en tokens jejej y que pueda ver el array de tarjetas y poder captar una viendo sus datos por id de tarjeta acoplando token de seguridad. Le quise poner mas cosas pero bueno me estaba creando una mini aplicacion pero mejor para entregar rapido lo dejé en proceso de aplicacion 
+
+!POR FAVOR MIRA LAS INSTRUCCIONES! 
+esta abajo para tu comodidad un link a testear las endpoint facilmente en postman! jeje *Me avisas se faltò algo y lo colocaré de inmediato* jejeje Buen dia
+este es mi whatsaap 3023108531
+
+!warning!´
+
+
+
 This backend is necesary to upload in a virtual machine because this backend app use a postgres and redis services. Plese, check out the config.js to configured
 --->Postgres v 13
 for install the postgres v13 go to --> https://computingforgeeks.com/how-to-install-postgresql-13-on-ubuntu/
@@ -6,7 +19,9 @@ One time you instaled
 1)Create one user postgres called = joonik
 2)configure the joonik password user = sadsvvex
 3)host = localhost
-4) create database = joonik_db
+4) create database = joonik_d
+
+//node version 12.20.0
 
 //steps for create database:
 type this commands:
