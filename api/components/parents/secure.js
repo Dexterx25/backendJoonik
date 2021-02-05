@@ -12,6 +12,14 @@ module.exports = function cheakAuth(action){
                auth.cheak.logged(req)
                next()
              break;
+             case 'getParems':
+               auth.cheak.logged(req)
+                next()
+               break;
+             case 'postData':
+               auth.cheak.logged(req)
+               next()
+               break;
            default:
                 next();
 

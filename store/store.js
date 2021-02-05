@@ -12,8 +12,8 @@ const { set } = require('../mailer')
         try{   
     
     console.log('THE table IS:', table)
-    const method = `INSERT INTO ${table}(id, first_name, last_name, phone_number, email, dateBirthday, encrypted_password, full_name) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING * `
-    const values = [`${body.id}`, `${body.first_name}`, `${body.last_name}`, `${body.phone_number}`, `${body.email}`, `${body.dateBirthday}`, `${body.newEncrypted_password}`, `${body.full_name}`]
+    const method = `INSERT INTO ${table}(id, email, password) VALUES($1, $2, $3) RETURNING * `
+    const values = [`${body.id}`, body.email, `${body.password}`, ]
        const fieldsUsers = await pool.query(method, values)  
      return fieldsUsers
     }catch(error){
@@ -23,20 +23,51 @@ const { set } = require('../mailer')
     }
     
 }
-  const createUserFacebook = async (body, table) =>{
-    try{   
+const getParents = async (data, table) =>{
+try{
+  const method = `SELECT * FROM parents WHERE user_id = $1`
+  const values = [data.id]
+  const responReq = await (await pool.query(method, values)).rows
+return responReq
+}catch(error){
+  return error
+}
+}
+const postParents = async (data, table) =>{
+  try{
+    const method = `INSERT INTO parents(user_id, description) values($1, $2) RETURNING *`
+    const values = [data.token.id, data.data.description]
+    const responReq = await (await pool.query(method, values)).rows
+  return responReq
+  }catch(error){
+    return error
+  }
+  }
+const createChildren = async (data, table)=>{
+try {
+  const method = `INSERT INTO childrens(parent_id, name) VALUES($1, $2) RETURNING *`
+  const values = [data.parent_id, data.name]
+  const responReq = await (await pool.query(method, values)).rows
+  return responReq
+} catch (error) {
+  return error
+}
+}
+const getChildren = async (data, table) =>{
+  console.log('este es la data-->',data)
+  try {
+   const method = `SELECT * FROM ${table} where parent_id = $1`
+   const values = [data.parent_id]
+   const responReq = await (await pool.query(method, values)).rows
+   console.log('este es el responReq--->', responReq)
+   return responReq
+  } catch (error) {
+    return error
+  }
+}
+
+
   
-      console.log('THE table IS:', table)
-      const method = `INSERT INTO ${table}(id, first_name, last_name, phone_number, email, dateBirthday, encrypted_password, full_name) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING * `
-      const values = [`${body.id}`, `${body.first_name}`, `${body.last_name}`, `${body.phone_number}`, `${body.email}`, `${body.dateBirthday}`, `${body.newEncrypted_password}`, `${body.full_name}`]
-         const fieldsUsers = await pool.query(method, values)  
-       return fieldsUsers
-      }catch(error){
-      
-      console.log(chalk.red("ERROR internal, SECURITY DATABASE:", error))
-      return  error
-      }
-}      
   const sendAuth = async (authData, table2) =>{
       try{
                    console.log("authDatas desde sendAuth function: ", authData)
@@ -183,84 +214,23 @@ const deleteDevice  = async (data, table) =>{
   }
 }
 
-//---CARDS:
-const addCard = async (data, table) =>{
-  console.log('this is the data addCard', data)
-try{  
-  const method = `INSERT INTO ${table}(id, user_id, banc_name, count_number, nickname, vcc, type_card) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *`
-  const values = [data.id, data.user_id, data.banc_name, data.count_number, data.nickname, data.vcc, data.type_card]
-  const responReq = await (await pool.query(method, values)).rows
-  console.log('this is ADDCARD Respon', responReq)
-  return responReq;
-}catch(e){
-  console.log('this is e', e)
-  return e
-}
-}
-const listMyCards = async (data, table) =>{
-  console.log('this is the user_id [STORE]', data)
-  try{
-    const method = `SELECT * FROM ${table} where user_id = $1`
-    const values = [data]
-    const responReq = await (await pool.query(method, values)).rows
-    console.log('este es el responReq', responReq)
-    return responReq
-  }catch(e){
-console.log('este es el e', e)
-return e
-  }
-}
-
-const getCard = async (data, table) => {
-console.log('this is the data', data)
-  try {
- const method = `SELECT * FROM ${table} where id = $1`
- const values = [data.id]
- const responReq = await (await pool.query(method, values)).rows
- console.log('this is the resporReq', responReq)
- return responReq
-} catch (e) {
-  return e
-}
-}
-//code :
-const RequestCode = async (data, table) =>{
-  console.log('this is the data', data)
-  try {
-    method = `SELECT * FROM ${table} WHERE code = $1`
-    values = [data.code]
-    responReq = await (await pool.query(method, values)).rows
-    console.log('responReq COde', responReq)
-    return responReq
-  } catch (error) {
-    console.log('this is the e', error)
-    return error
-  }
-}
 module.exports = {
     //users:
-    create:createUser,    
+    create:createUser,
+    insertLogin,    
     list:listUsers,
    // filter_u,
     get:getUser,
     update:updateUser,
-
+//parents ------>
+getParents,
+postParents,
+//childrens ----->
+getChildren,
+createChildren,
     //auth:
     sendAuth,
-    insertLogin,
-    create_UF:createUserFacebook,
     getReset:resquestEmailReset,
     
-    //device:
-    add_D:addDevice,
-    get_D:getDevices,
-    remove_D:deleteDevice,
-
-    //cards :
-    create_C:addCard,
-    list_c:listMyCards,
-    get_card:getCard,
-
-    //codes :
-    get_c:RequestCode
+   
 }

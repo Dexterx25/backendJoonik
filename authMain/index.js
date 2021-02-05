@@ -8,7 +8,10 @@ const SECRET = config.jwt.secret;
 }
 
 function verify (token){
-  return jwt.verify(token, SECRET)
+   //   console.log('ESTEEE--->', jwt.verify(token, SECRET))
+   const verifyData = jwt.verify(token, SECRET)
+ console.log('verifyData--->', verifyData)
+   return verifyData
 }
 
 const cheak = {
@@ -37,7 +40,7 @@ const cheak = {
 
 function getToken(auth){ 
     if(!auth){
-        throw  error('Don`t bring Token', 401)
+        throw  error('Usuario incorrecto o no autenticado', 401)
 
         //throw new Error('Don`t bring Token', 401)
     }

@@ -7,22 +7,17 @@ const config = require('../config.js');
 const cors = require('cors')
 
 const user = require('./components/user/network');
-const admin = require('./components/admin/network');
-const code = require('./components/codes/network')
-const auth = require('./components/auth/network');
+const parents = require('./components/parents/network')
+const children = require('./components/childrens/network')
 const errors = require('../network/errors');
 
 const app = express();
 //const server = require('http').Server(app)
 app.use(bodyParser.json());
-//const socket = require('../socket')
-//const swaggerDoc = require('./swagger.json');
 
-// ROUER
-app.use('/api/users', user);
-app.use('/api/auth', auth);
-app.use('/api/admins', admin)
-app.use('/api/codes', code)
+app.use('/', user);
+app.use('/parents', parents)
+app.use('/children', children)
 app.use(cors());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/app', express.static('public'));

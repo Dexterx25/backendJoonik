@@ -8,25 +8,14 @@ module.exports = function cheakAuth(action){
                 auth.cheak.own(req, owner)
                 next()
               break;
-          
-           case 'createCard':
+              case 'PostChildren':
                auth.cheak.logged(req)
                next()
              break;
-             case 'obtainCard':
-                auth.cheak.logged(req)
-                next()
-              break;
-           case 'obtainsAllCards':
-               auth.cheak.logged(req)
-               next()
-               break;
-
-           case 'filterCard_name':
+             case 'getChildrens':
                auth.cheak.logged(req)
                next()
              break;
-        
            default:
                 next();
 
