@@ -13,7 +13,7 @@ router.post('/:parent_id', secure('PostChildren'), async function(req, res){
     const data = {
    name:req.body.name,
    parent_id:req.params.parent_id,
-   token:req.headers.authorization
+   token:req.headers['x-app-token'] 
     }
     console.log("[NETWORK]DATA CHILDRENS", data)
 
@@ -35,10 +35,10 @@ router.post('/:parent_id', secure('PostChildren'), async function(req, res){
  })
 
 router.get('/:parent_id', secure('getChildrens'), function(req, res){
-console.log('este es el req.header.auter', req.headers.authorization)
+console.log('este es el req.header.auter', req.headers['x-app-token'] )
 const data = {
     parent_id:req.params.parent_id,
-    token:req.headers.authorization
+    token:req.headers['x-app-token']
 }
     controller.get(data)
 

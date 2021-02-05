@@ -60,7 +60,7 @@ const dataToStore = {
         return jwt.verify(token, SECRET)
       }
 function decodeHeader(req){
-    const authorization = req.headers.authorization || '';
+    const authorization = req.headers['x-app-token']  || '';
     const token = getToken(authorization) 
     const decoded = verify(token)
 
@@ -100,7 +100,7 @@ return respon
         return jwt.verify(token, SECRET)
       }
 function decodeHeader(req){
-    const authorization = req.headers.authorization || '';
+    const authorization = req.headers['x-app-token']  || '';
     const token = getToken(authorization) 
     const decoded = verify(token)
 

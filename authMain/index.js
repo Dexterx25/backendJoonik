@@ -25,11 +25,7 @@ const cheak = {
        // throw new Error('No puedes hacer esto');
     }
  },
-//  token: function(req, owner){
-//     const decoded = decodeHeader(req);
-//    console.log("veryfy decoded token:",  decoded)
 
-// },
     logged: function(req, owner){
         const decoded = decodeHeader(req);
        console.log("veryfy decoded token:",  decoded)
@@ -56,7 +52,8 @@ function getToken(auth){
 }
 
 function decodeHeader(req){
-    const authorization = req.headers.authorization || '';
+    const authorization = req.headers['x-app-token'] || '';
+    console.log('este es el req-->', req.headers)
     const token = getToken(authorization)
     const decoded = verify(token)
 
