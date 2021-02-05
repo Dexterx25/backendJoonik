@@ -15,7 +15,6 @@ router.post('/register', async function(req, res){
         password:req.body.password,
         cpassword:req.body.cpassword
     }
-    console.log("[NETWORK]DATA USERS", data)
 
     controller.create(data) 
         
