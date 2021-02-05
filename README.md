@@ -1,8 +1,10 @@
 # backendJoonik
 !warning! 
-
-Hola, testeador. 
-Los puntos requeridos entan en los endpoints de registro de usuario, login y bueno... lo que entendi en los otros dos puntos es que trayera datos de usuario en este caso le coloquè un microservicio "cards" para registrar tarjetas de creditos con seguridad en tokens jejej y que pueda ver el array de tarjetas y poder captar una viendo sus datos por id de tarjeta acoplando token de seguridad. Le quise poner mas cosas pero bueno me estaba creando una mini aplicacion pero mejor para entregar rapido lo dejé en proceso de aplicacion 
+Hola amigo, ya está. Puede verificar las endpoint pero colocando http://localhost:3000/
+ahora, para correr el servicion haces primero npm install para instalar las dependencias y luego haces npm run main y asi se activará el backend de forma desarrollo. Si deseas tambien puedes instalar pm2 que es para produccion y haces pm2 start api/index y listo! PD: ten en cuenta montar a base de datos de postman el archivo sql pero verificas primero que hayas seguido correctamente la instalacion del sql teniendo en cuenta el archivo config.js 
+Aqui está el postman para que pruebes facilmente:  que para tu comodidad hice las endpoints de crear datos para los parametros children y parents
+Me avisas
+https://www.getpostman.com/collections/088c3c762933d694da39
 
 !POR FAVOR MIRA LAS INSTRUCCIONES! 
 esta abajo para tu comodidad un link a testear las endpoint facilmente en postman! jeje *Me avisas se faltò algo y lo colocaré de inmediato* jejeje Buen dia
